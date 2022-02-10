@@ -4097,7 +4097,7 @@ a.setAttribute('href', 'https://example.com/'); // change the content attribute 
    <dt>Filter Effects</dt>
 
    <dd>
-    <p>The following feature is defined in <cite>Filter Effects</cite>:
+    <p>The following features are defined in <cite>Filter Effects</cite>:
     <ref spec=FILTERS></p>
 
     <ul class="brief">
@@ -4107,6 +4107,19 @@ a.setAttribute('href', 'https://example.com/'); // change the content attribute 
     </ul>
    </dd>
 
+   <dt>Compositing</dt>
+
+   <dd>
+    <p>The following features are defined in <cite>Compositing and Blending</cite>:
+    <ref spec=COMPOSITE></p>
+
+    <ul class="brief">
+     <li><dfn data-x-href="https://drafts.fxtf.org/compositing/#ltblendmodegt">&lt;blend-mode&gt;</dfn></li>
+     <li><dfn data-x-href="https://drafts.fxtf.org/compositing/#compositemode">&lt;composite-mode&gt;</dfn></li>
+     <li><dfn data-x-href="https://drafts.fxtf.org/compositing/#porterduffcompositingoperators_srcover" data-x="gcop-source-over">source-over</dfn></li>
+     <li><dfn data-x-href="https://drafts.fxtf.org/compositing/#porterduffcompositingoperators_src" data-x="gcop-copy">copy</dfn></li>
+    </ul>
+   </dd>
    <dt>Cooperative Scheduling of Background Tasks</dt>
 
    <dd>
@@ -61249,7 +61262,7 @@ interface mixin <dfn interface>CanvasTransform</dfn> {
 interface mixin <dfn interface>CanvasCompositing</dfn> {
   // compositing
   attribute unrestricted double <span data-x="dom-context-2d-globalAlpha">globalAlpha</span>; // (default 1.0)
-  attribute DOMString <span data-x="dom-context-2d-globalCompositeOperation">globalCompositeOperation</span>; // (default source-over)
+  attribute DOMString <span data-x="dom-context-2d-globalCompositeOperation">globalCompositeOperation</span>; // (default "source-over")
 };
 
 interface mixin <dfn interface>CanvasImageSmoothing</dfn> {
@@ -61828,10 +61841,10 @@ context.fillRect(100,0,50,50); // only this square remains</code></pre>
    spacing</span>, <span data-x="concept-CanvasTextDrawingStyles-word-spacing">word
    spacing</span>, <span data-x="concept-CanvasFillStrokeStyles-fill-style">fill style</span>,
    <span data-x="concept-CanvasFillStrokeStyles-stroke-style">stroke style</span>, <span
-   data-x="concept-canvas-current-filter">filter</span>, and <span
-   data-x="current composition operator">composition operator</span>.</li>
+   data-x="concept-canvas-current-filter">filter</span>, <span
+   data-x="concept-canvas-global-alpha">global alpha</span>, and <span
+   data-x="current compositing and blending operator">compositing and blending operator</span>.</li>
    <li>The current values of the following attributes: <code
-   data-x="dom-context-2d-globalAlpha">globalAlpha</code>, <code
    data-x="dom-context-2d-lineWidth">lineWidth</code>, <code
    data-x="dom-context-2d-lineCap">lineCap</code>, <code
    data-x="dom-context-2d-lineJoin">lineJoin</code>, <code
@@ -64802,8 +64815,8 @@ try {
   <p>Shapes are painted without affecting the <span>current default path</span>, and are subject to
   the <span>clipping region</span>, and, with the exception of <code
   data-x="dom-context-2d-clearRect">clearRect()</code>, also <span data-x="shadows">shadow
-  effects</span>, <span data-x="dom-context-2d-globalAlpha">global alpha</span>, and <span
-  data-x="dom-context-2d-globalCompositeOperation">global composition operators</span>.</p>
+  effects</span>, <span data-x="concept-canvas-global-alpha">global alpha</span>, and the
+  <span>current compositing and blending operator</span>.</p>
 
   </div>
 
@@ -64968,9 +64981,9 @@ try {
     data-x="concept-CanvasFillStrokeStyles-fill-style">fill style</span> must be ignored.</p>
 
     <p>These shapes are painted without affecting the current path, and are subject to <span
-    data-x="shadows">shadow effects</span>, <span data-x="dom-context-2d-globalAlpha">global
-    alpha</span>, the <span>clipping region</span>, and <span
-    data-x="dom-context-2d-globalCompositeOperation">global composition operators</span>.</p>
+    data-x="shadows">shadow effects</span>, <span data-x="concept-canvas-global-alpha">global
+    alpha</span>, the <span>clipping region</span>, and the <span>current compositing and blending
+    operator</span>.</p>
    </li>
   </ol>
 
@@ -65236,10 +65249,10 @@ try {
 
   <p>Paths, when filled or stroked, must be painted without affecting the <span>current default
   path</span> or any <code>Path2D</code> objects, and must be subject to <span
-  data-x="shadows">shadow effects</span>, <span data-x="dom-context-2d-globalAlpha">global
-  alpha</span>, the <span>clipping region</span>, and <span
-  data-x="dom-context-2d-globalCompositeOperation">global composition operators</span>. (The effect
-  of transformations is described above and varies based on which path is being used.)</p>
+  data-x="shadows">shadow effects</span>, <span data-x="concept-canvas-global-alpha">global
+  alpha</span>, the <span>clipping region</span>, and the <span>current compositing and blending
+  operator</span>. (The effect of transformations is described above and varies based on which path
+  is being used.)</p>
 
   <hr>
 
@@ -65462,13 +65475,13 @@ try {
     data-x="dom-focus">focus()</code> method based on the kind of user interaction event from which
     the call was triggered (if any).</p>
 
-    <p>The focus ring should not be subject to the <span data-x="shadows">shadow effects</span>, the
-    <span data-x="dom-context-2d-globalAlpha">global alpha</span>, the <span
-    data-x="dom-context-2d-globalCompositeOperation">global composition operators</span>, or any of
-    the members in the <code>CanvasFillStrokeStyles</code>, <code>CanvasPathDrawingStyles</code>,
+    <p>The focus ring should not be subject to the <span data-x="shadows">shadow effects</span>,
+    the <span data-x="concept-canvas-global-alpha">global alpha</span>, the <span>current
+    compositing and blending operator</span>, or any of the members in the
+    <code>CanvasFillStrokeStyles</code>, <code>CanvasPathDrawingStyles</code>,
     <code>CanvasTextDrawingStyles</code> interfaces, but <em>should</em> be subject to the
-    <span>clipping region</span>. (The effect of transformations is described above and varies based
-    on which path is being used.)</p>
+    <span>clipping region</span>. (The effect of transformations is described above and varies
+    based on which path is being used.)</p>
    </li>
 
    <li><p><a href="#inform">Inform the user</a> that the focus is at the location given by the
@@ -65648,9 +65661,9 @@ try {
     into temporary <code>canvas</code> elements and drawing the scaled sprites from there.</p>
 
     <p>Images are painted without affecting the current path, and are subject to <span
-    data-x="shadows">shadow effects</span>, <span data-x="dom-context-2d-globalAlpha">global
-    alpha</span>, the <span>clipping region</span>, and <span
-    data-x="dom-context-2d-globalCompositeOperation">global composition operators</span>.</p>
+    data-x="shadows">shadow effects</span>, <span data-x="concept-canvas-global-alpha">global
+    alpha</span>, the <span>clipping region</span>, and the <span>current compositing and blending
+    operator</span>.</p>
    </li>
 
    <li><p>If <var>image</var> <span>is not origin-clean</span>, then set the
@@ -65731,10 +65744,10 @@ try {
     <p>Paints the data from the given <code>ImageData</code> object onto the bitmap. If a dirty
     rectangle is provided, only the pixels from that rectangle are painted.</p>
 
-    <p>The <code data-x="dom-context-2d-globalAlpha">globalAlpha</code> and <code
-    data-x="dom-context-2d-globalCompositeOperation">globalCompositeOperation</code> attributes, as
-    well as the shadow attributes, are ignored for the purposes of this method call; pixels in the
-    canvas are replaced wholesale, with no composition, alpha blending, no shadows, etc.</p>
+    <p>The <code data-x="concept-canvas-global-alpha">global alpha</code> and <span>current
+    compositing and blending operator</span> attributes, as well as the <span data-x="shadows">shadow
+    attributes</span>, are ignored for the purposes of this method call; pixels in the canvas are
+    replaced wholesale, with no compositing, alpha blending, no shadows, etc.</p>
 
     <p>Throws an <span>"<code>InvalidStateError</code>"</span> <code>DOMException</code> if the
     <var>imagedata</var> object's <code data-x="dom-imagedata-data">data</code> attribute value's
@@ -66050,10 +66063,9 @@ try {
   data-x="dom-context-2d-getImageData">getImageData()</code> as different values.</p>
 
   <p>The current path, <span data-x="dom-context-2d-transformation">transformation matrix</span>,
-  <span data-x="shadows">shadow attributes</span>, <span data-x="dom-context-2d-globalAlpha">global
-  alpha</span>, the <span>clipping region</span>, and <span
-  data-x="dom-context-2d-globalCompositeOperation">global composition operator</span> must not
-  affect the methods described in this section.</p>
+  <span data-x="shadows">shadow attributes</span>, <span data-x="concept-canvas-global-alpha">global
+  alpha</span>, the <span>clipping region</span>, and <span>current compositing and blending
+  operator</span> must not affect the methods described in this section.</p>
 
   </div>
 
@@ -66195,58 +66207,63 @@ console.log(pixels.data[2]);
    <dt><code data-x=""><var>context</var>.<span subdfn data-x="dom-context-2d-globalCompositeOperation">globalCompositeOperation</span> [ = <var>value</var> ]</code></dt>
 
    <dd>
-    <p>Returns the current composition operation, from the values defined in <cite>Compositing and
-    Blending</cite>. <ref spec=COMPOSITE>.</p>
+    <p>Returns the current compositing and blending operator, from the values defined in
+    <cite>Compositing and Blending</cite>. <ref spec=COMPOSITE>.</p>
 
-    <p>Can be set, to change the composition operation. Unknown values are ignored.</p>
+    <p>Can be set, to change the compositing and blending operator. Unknown values are ignored.</p>
    </dd>
   </dl>
 
   <div w-nodev>
 
-  <p>All drawing operations on an object which implements the <code>CanvasCompositing</code>
-  interface are affected by the global compositing attributes, <code
-  data-x="dom-context-2d-globalAlpha">globalAlpha</code> and <code
-  data-x="dom-context-2d-globalCompositeOperation">globalCompositeOperation</code>.</p>
+  <p>Objects that implements the <code>CanvasCompositing</code> interface have a <span
+  data-x="concept-canvas-global-alpha">global alpha</span> value and a <span>current compositing
+  and blending operator</span> value that both affect all the drawing operations on this
+  object.</p>
 
   <!-- conformance criteria for painting are described in the "drawing model" section below -->
 
-  <p>The <dfn attribute for="CanvasCompositing"><code
-  data-x="dom-context-2d-globalAlpha">globalAlpha</code></dfn> attribute gives an alpha value that
-  is applied to shapes and images before they are composited onto the <span>output bitmap</span>.
-  The value must be in the range from 0.0 (fully transparent) to 1.0 (no additional transparency).
-  If an attempt is made to set the attribute to a value outside this range, including Infinity and
-  Not-a-Number (NaN) values, then the attribute must retain its previous value. When the context is
-  created, the <code data-x="dom-context-2d-globalAlpha">globalAlpha</code> attribute must initially
-  have the value 1.0.</p>
+  <p>The <dfn data-x="concept-canvas-global-alpha">global alpha</dfn> value gives an alpha value
+  that is applied to shapes and images before they are composited onto the <span>output bitmap</span>.
+  The value ranges from 0.0 (fully transparent) to 1.0 (no additional transparency). It must
+  initially have the value 1.0.</p>
 
   <p>The <dfn attribute for="CanvasCompositing"><code
-  data-x="dom-context-2d-globalCompositeOperation">globalCompositeOperation</code></dfn> attribute
-  sets the <dfn>current composition operator</dfn>, which controls how shapes and images are drawn
-  onto the <span>output bitmap</span>, once they have had <code
-  data-x="dom-context-2d-globalAlpha">globalAlpha</code> and the current transformation matrix
-  applied. The possible values are those defined in <cite>Compositing and Blending</cite>, and
-  include the values <dfn><code data-x="gcop-source-over"
-  data-x-href="https://drafts.fxtf.org/compositing-1/#porterduffcompositingoperators_srcover">source-over</code></dfn>
-  and <dfn><code data-x="gcop-copy"
-  data-x-href="https://drafts.fxtf.org/compositing-1/#porterduffcompositingoperators_src">copy</code></dfn>.
-  <ref spec=COMPOSITE></p>
+  data-x="dom-context-2d-globalAlpha">globalAlpha</code></dfn> getter steps are to return this's
+  <span data-x="concept-canvas-global-alpha">global alpha</span>.</p>
 
-  <p>These values are all case-sensitive &mdash; they must be used exactly as defined. User agents
-  must not recognize values that are not <span>identical to</span> one of the values given in
-  <cite>Compositing and Blending</cite>. <ref spec=COMPOSITE></p>
+  <p>The <code data-x="dom-context-2d-globalAlpha">globalAlpha</code> setter steps are:
 
-  <p>On setting, if the user agent does not recognize the specified value, it must be ignored,
-  leaving the value of <code
-  data-x="dom-context-2d-globalCompositeOperation">globalCompositeOperation</code> unaffected.
-  Otherwise, the attribute must be set to the given new value.</p>
+  <ol>
+   <li><p>If the given value is either infinite, NaN or not in the range 0.0 to 1.0, then
+   return.</p></li>
+   <li><p>Otherwise, set this's <span data-x="concept-canvas-global-alpha">global alpha</span>
+   to the given value.</p></li>
+  </ol>
 
-  <p>When the context is created, the <code
-  data-x="dom-context-2d-globalCompositeOperation">globalCompositeOperation</code> attribute must
-  initially have the value <code data-x="gcop-source-over">source-over</code>.</p>
+  <p>The <dfn>current compositing and blending operator</dfn> value controls how shapes and images
+  are drawn onto the <span>output bitmap</span>, once they have had the <span
+  data-x="concept-canvas-global-alpha">global alpha</span> and the <span>current transformation
+  matrix</span> applied. Initially, it must be set to <span
+  data-x="gcop-source-over">source-over</span>.</p>
+
+  <p>The <dfn attribute for="CanvasCompositing"><code
+  data-x="dom-context-2d-globalCompositeOperation">globalCompositeOperation</code></dfn> getter
+  steps are to return this's <span>current compositing and blending operator</span></p>
+
+  <p>The <code
+  data-x="dom-context-2d-globalCompositeOperation">globalCompositeOperation</code> setter steps
+  are:</p>
+
+  <ol>
+   <li><p>If the given value is not <span>identical to</span> any of the values that compose the
+   <span>&lt;blend-mode&gt;</span> or the <span>&lt;composite-mode&gt;</span> properties,
+   then return. <ref spec=COMPOSITE></p></li>
+   <li><p>Otherwise, set this's <span>current compositing and blending operator</span> to the given
+   value.</p></li>
+  </ol>
 
   </div>
-
 
 
   <h6>Image smoothing</h6>
@@ -66419,8 +66436,9 @@ console.log(pixels.data[2]);
 
   </div>
 
-  <p>If the current composition operation is <code data-x="gcop-copy">copy</code>, then shadows
-  effectively won't render (since the shape will overwrite the shadow).</p>
+  <p>If the <span>current compositing and blending operator</span> is <span
+  data-x="gcop-copy">copy</span>, then shadows effectively won't render (since the shape will
+  overwrite the shadow).</p>
 
   <h6>Filters</h6>
 
@@ -66798,17 +66816,19 @@ context.filter = new CanvasFilter([
    <li><p><span>When shadows are drawn</span>, render the shadow from image <var>B</var>,
    using the current shadow styles, creating image <var>C</var>.</p></li>
 
-   <li><p><span>When shadows are drawn</span>, multiply the alpha component of every pixel in <var>C</var> by <code data-x="dom-context-2d-globalAlpha">globalAlpha</code>.</p></li>
+   <li><p><span>When shadows are drawn</span>, multiply the alpha component of every pixel in
+   <var>C</var> by <code data-x="concept-canvas-global-alpha">global alpha</code>.</p></li>
 
    <li><p><span>When shadows are drawn</span>, composite <var>C</var> within the
    <span>clipping region</span> over the current <span>output bitmap</span> using the <span>current
-   composition operator</span>.</p></li>
+   compositing and blending operator</span>.</p></li>
 
    <li><p>Multiply the alpha component of every pixel in <var>B</var> by <code
-   data-x="dom-context-2d-globalAlpha">globalAlpha</code>.</p></li>
+   data-x="concept-canvas-global-alpha">global alpha</code>.</p></li>
 
    <li><p>Composite <var>B</var> within the <span>clipping region</span> over the current
-   <span>output bitmap</span> using the <span>current composition operator</span>.</p></li>
+   <span>output bitmap</span> using the <span>current compositing and blending
+   operator</span>.</p></li>
   </ol>
 
   <p>When compositing onto the <span>output bitmap</span>, pixels that would fall outside of the
@@ -67059,10 +67079,11 @@ dictionary <dfn dictionary>ImageBitmapRenderingContextSettings</dfn> {
   of the <code>canvas</code> element to which the context is bound are obtained by
   compositing the context's <span
   data-x="concept-ImageBitmapRenderingContext-output-bitmap">output bitmap</span> onto an
-  <span>opaque black</span> bitmap of the same size using the source-over composite operation. If
-  the <span data-x="concept-ImageBitmapRenderingContext-alpha">alpha</span> flag is set to true,
-  then the <span data-x="concept-ImageBitmapRenderingContext-output-bitmap">output bitmap</span> is
-  used as the contents of the <code>canvas</code> element to which the context is bound. <ref
+  <span>opaque black</span> bitmap of the same size using the <span
+  data-x="gcop-source-over">source-over</span> compositing operator. If the <span
+  data-x="concept-ImageBitmapRenderingContext-alpha">alpha</span> flag is set to true, then the
+  <span data-x="concept-ImageBitmapRenderingContext-output-bitmap">output bitmap</span> is used as
+  the contents of the <code>canvas</code> element to which the context is bound. <ref
   spec=COMPOSITE></p>
 
   <p class="note">The step of compositing over an <span>opaque black</span> bitmap ought to be
@@ -67896,7 +67917,8 @@ interface <dfn interface>OffscreenCanvasRenderingContext2D</dfn> {
   lowercase</span> before establishing if they support that type.</p>
 
   <p>For image types that do not support an alpha channel, the serialized image must be the bitmap
-  image composited onto an <span>opaque black</span> background using the source-over operator.</p>
+  image composited onto an <span>opaque black</span> background using the <span
+  data-x="gcop-source-over">source-over</span> compositing operator.</p>
 
   <p>For image types that support color profiles, the serialized image must include a color profile
   indicating the color space of the underlying bitmap. For image types that do not support color
